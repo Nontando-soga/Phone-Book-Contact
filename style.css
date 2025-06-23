@@ -11,26 +11,26 @@ head{
 }
 
 .refresh:hover{
-    background-color: yellow;
+     background-color: #ff9e06;
     cursor: pointer;
 }
 
-#addContacts:hover{
+.addContacts:hover{
     background-color: rgba(135, 222, 144, 0.98);
     cursor: pointer;
 }
 
-#homelink:hover{
+.homelink:hover{
+    background-color: red;
+    cursor: pointer;
+}
+
+.editContact:hover{
     background-color: rgba(135, 222, 144, 0.98);
     cursor: pointer;
 }
 
-#editContact:hover{
-    background-color: rgba(135, 222, 144, 0.98);
-    cursor: pointer;
-}
-
-#deleteContact:hover{
+.deleteContact:hover{
     background-color: rgba(135, 222, 144, 0.98);
     cursor: pointer;
 }
