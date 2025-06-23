@@ -9,3 +9,28 @@ head{
     background-color: #fff12345;
     padding: 0;       
 }
+
+.refresh:hover{
+    background-color: yellow;
+    cursor: pointer;
+}
+
+#addContacts:hover{
+    background-color: rgba(135, 222, 144, 0.98);
+    cursor: pointer;
+}
+
+#homelink:hover{
+    background-color: rgba(135, 222, 144, 0.98);
+    cursor: pointer;
+}
+
+#editContact:hover{
+    background-color: rgba(135, 222, 144, 0.98);
+    cursor: pointer;
+}
+
+#deleteContact:hover{
+    background-color: rgba(135, 222, 144, 0.98);
+    cursor: pointer;
+}
