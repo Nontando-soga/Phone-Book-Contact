@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Add Contact</title>
+    </head>
+    <body>
+        <br/>
+        <form id ="editForm">
+             <label for ="firstname">First name</label>
+             <input type ="text" name ="firstname" id ="firstname"><br/>
+             <label for ="lastname">Last name</label>
+             <input type ="text" name ="lastname" id ="lastname"><br/>
+             <label for ="mobile">Mobile</label>
+             <input type ="text" name ="mobile" id ="mobile"><br/>
+             <label for ="email">Email</label>
+             <input type ="text" name ="email" id ="email"><br/>
+             <label for ="avatar">Select a file</label><br/>
+             <input type ="file" name ="avatar" id ="avatar"><br/>
+             <button type ="submit" id ="submitForm">Submit</button>       
+        </form>
+        <br/>
+        <button id ="homelink" type ="button">Home</button>
+        
+        <script src="config.js"></script>
+        <script>
+            document.getElementById("submitForm").addEventListener('click',submitForm);       //Adding eventListener of the two buttons "home" and "submit" button  
+            document.getElementById("homelink").addEventListener('click', homelink);
+            
+            function submitForm(e){                                               //This function is responsible for gathering information in the form and submit it to the server.
+                e.preventDefault();                                               //the 'e' parameter is passed to prevent the default behaviour. After hitting the submit button, the form reloads the page so we want to avoid the page reloading
+                
+                const form = new FormData(document.querySelector('#editForm'));  //Create form data object that includes all the data that the user has submitted in the form.
+                form.append('apiKey', apiKey);                                   //adding another key value pair and its value will be apiKey 
+             
+                fetch(rootPath + 'controller/insert-contact/', {                  //Submtting this form data object to the server (API)
+                    method: 'POST',                                              // We called the fecth function and passing it the api rootPath to the insert-contact function. (*.* means accept all types of data)
+                    headers: {'Accept': 'application/json, *.*'},               
+                    body: form
+                })
+                .then(function(response){                                       //we are submitting this form to the server, the server sendback 1 if submission is successful, or 0 if submission is unsuccessful.
+                     return response.text();
+                     })
+                .then(function(data){
+                      if(data =="1"){
+                          alert("Contact added.");
+                          homelink(); 
+                      }else{
+                          alert(data);
+                          homelink();
+                      }
+                })
+            }
+           
+            //Actioning the link to the homepage
+            function homelink(){
+                window.open("index.html", "_self");                  //This is a JavaScript built-in function that opens up a new window 
+                                                                  // the "_self" means that index.html must open up in the same window
+            
+            }
+            
+      
+        </script>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Contacts</title>
+    </head>
+    <body onload="fetchContacts()">
+        
+        <div id ="table">Contacts Loading...</div>
+        <button id = "refresh" type ="button">Refresh</button>
+        <button id ="addContacts" type ="button"> Add Contact</button>
+        
+        <script src="config.js"></script>
+        <script>
+        document.getElementById("refresh").addEventListener('click', fetchContacts);  //To implement the refresh button, we add the code event handler which in this case is event listener fetchContacts 
+        document.getElementById("addContacts").addEventListener('click', addContacts);
+            function fetchContacts(){
+            fetch(rootPath + "controller/get-contacts/")
+            .then(function(response){
+                return response.json();     //in this function "fetchContacts" we are retrieving a JSON Array called "data"
+            })                              //passing the array into the "displayOutput" function and it displays the content inside that array
+            .then(function(data){           //into are "table"
+                displayOutput(data);
+                //console.log(data);
+            })
+            }
+        function displayOutput(data){
+            output ="<table>";
+            
+            for(a in data){                  //We then iterate through the table, taking each elememt and put it into the cell of the table
+                                          //linking to the "editContact" function to the contact pages
+                                          //${data}[a].avatar means that the information is from the data (storage)
+                output += `
+                   <tr onclick ="editContact(${data[a].id})">                                                    
+                       <td><img src ="${rootPath}controller/uploads/${data[a].avatar}" width ="40"/></td>       
+                       <td><h5>${data[a].firstname}</h5></td>
+                       <td><h5>${data[a].lastname}</h5></td>
+                  </tr>
+                `      
+            }
+            output += "</table>";
+            document.getElementById("table").innerHTML = output;  //then link this function to the HTML to set it and be ready for display
+            
+             }
+           
+            function addContacts(){
+            window.open("add-contact.html", "_self");              //This is a JavaScript built-in function that opens up a new window 
+                                                                // the "_self" means that index.html must open up in the same window
+            }
+            function editContact(id){                                  //the "id" parameter is the identifer of the contact that has been clicked
+                window.open("edit-contact.html?id=" +id, "_self");
+            }
+            
+        
+
+        </script>
+    </body>
+</html>
